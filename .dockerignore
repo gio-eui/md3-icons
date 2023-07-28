@@ -1,0 +1,10 @@
+# ignore all files and folders
+.git/
+.idea/
+.assets/
+.icons/
+.temp/
+
+.gitattributes
+.gitignore
+*.go
