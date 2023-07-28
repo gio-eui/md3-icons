@@ -26,15 +26,16 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/gio-eui/ivgconv"
 	"go/format"
-	"golang.org/x/text/cases"
-	"golang.org/x/text/language"
 	"io/fs"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/gio-eui/ivgconv"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 // Convert all svg files from the assets folder to iconVG files
@@ -179,6 +180,9 @@ func collectIcons() ([]*Icon, error) {
 	// List all files in the assets folder and its subfolders recursively which have
 	// the .svg extension using filepath.WalkDir
 	err := filepath.WalkDir(srcFolder, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
 		// If the file is not a directory and is named 24px.svg
 		if !d.IsDir() && filepath.Base(path) == "24px.svg" {
 			// Get the icon info
@@ -259,12 +263,15 @@ func generateIconVG(icon *Icon) error {
 	}
 	fmt.Fprintf(out, "}\n")
 
-	dst, err := format.Source(out.Bytes())
+	// Format the code
+	src, err := format.Source(out.Bytes())
 	if err != nil {
 		return err
 	}
-	if err := os.WriteFile(filepath.Join(icon.PackagePath, "icon.go"), dst, os.ModePerm); err != nil {
-		log.Fatal(err)
+
+	// Write icon file
+	if err := os.WriteFile(filepath.Join(icon.PackagePath, "icon.go"), src, os.ModePerm); err != nil {
+		return err
 	}
 	return nil
 }
