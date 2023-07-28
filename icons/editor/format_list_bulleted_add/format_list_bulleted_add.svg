@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+  <path fill="none" d="M0 0H24V24H0z"/>
+  <path d="M18 13c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z m3 5.5h-2.5V21h-1v-2.5H15v-1h2.5V15h1v2.5H21v1z"/>
+  <path d="M7 5H20V7H7z"/>
+  <circle cx="3.5" cy="18" r="1.5"/>
+  <path d="M18 11H7v2h6.11c1.26-1.24 2.99-2 4.89-2zM7 17v2h4.08c-0.05-0.33-0.08-0.66-0.08-1s0.03-0.67 0.08-1H7z"/>
+  <circle cx="3.5" cy="6" r="1.5"/>
+  <circle cx="3.5" cy="12" r="1.5"/>
+</svg>

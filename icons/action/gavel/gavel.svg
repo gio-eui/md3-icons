@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+  <path fill="none" d="M0 0H24V24H0z"/>
+  <path d="M11.73 3.73H15.73V23.73H11.73z" transform="rotate(-44.968 13.731 13.728)"/>
+  <path d="M11.73 1.24H15.73V9.24H11.73z" transform="rotate(-45.009 13.73 5.242)"/>
+  <path d="M3.24 9.73H7.24V17.73H3.24z" transform="rotate(-45.001 5.24 13.728)"/>
+  <path d="M1 21H13V23H1z"/>
+</svg>

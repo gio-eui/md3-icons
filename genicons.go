@@ -121,6 +121,7 @@ type Icon struct {
 	IconName    string
 	PackageName string
 	PackagePath string
+	FileName    string
 }
 
 // IconError is a struct that contains the icon error info
@@ -158,6 +159,10 @@ func main() {
 		icon.PackagePath = filepath.Join(destFolder, icon.Category, icon.Name, icon.Type.ext())
 		// Create the icons.go file
 		if err := generateIconVG(icon); err != nil {
+			errs = append(errs, IconError{Icon: icon, Error: err})
+		}
+		// Copy the optimized SVG file along with the iconVG file
+		if err := copySVG(icon); err != nil {
 			errs = append(errs, IconError{Icon: icon, Error: err})
 		}
 	}
@@ -201,6 +206,8 @@ func collectIcons() ([]*Icon, error) {
 			icon.IconName = icoName(*icon)
 			// Set the package name
 			icon.PackageName = pkgNane(*icon)
+			// Set the icon FileName
+			icon.FileName = fileName(*icon)
 			// Add the icon to the icons slice
 			icons = append(icons, icon)
 		}
@@ -237,6 +244,14 @@ func pkgNane(icon Icon) string {
 	return pn
 }
 
+func fileName(icon Icon) string {
+	fn := icon.Name
+	if len(icon.Type.ext()) > 0 {
+		fn = fmt.Sprintf("%s_%s", fn, icon.Type.ext())
+	}
+	return fn
+}
+
 func generateIconVG(icon *Icon) error {
 	// Convert the SVG file to IconVG
 	ivgData, err := ivgconv.FromFile(icon.Path)
@@ -270,7 +285,22 @@ func generateIconVG(icon *Icon) error {
 	}
 
 	// Write icon file
-	if err := os.WriteFile(filepath.Join(icon.PackagePath, "icon.go"), src, os.ModePerm); err != nil {
+	if err := os.WriteFile(filepath.Join(icon.PackagePath, icon.FileName+".go"), src, os.ModePerm); err != nil {
+		return err
+	}
+	return nil
+}
+
+func copySVG(icon *Icon) error {
+	// Read the SVG source file
+	input, err := os.ReadFile(icon.Path)
+	if err != nil {
+		return err
+	}
+
+	// Write the SVG file
+	err = os.WriteFile(filepath.Join(icon.PackagePath, icon.FileName+".svg"), input, os.ModePerm)
+	if err != nil {
 		return err
 	}
 	return nil

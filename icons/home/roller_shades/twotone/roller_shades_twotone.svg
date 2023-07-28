@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+  <path fill="none" d="M0 0H24V24H0z"/>
+  <path d="M6 5H18V11H6z" opacity=".3"/>
+  <path d="M20 19V3H4v16H2v2h20v-2H20zM18 19H6v-6h5v1.82c-0.45 0.32-0.75 0.84-0.75 1.43 0 0.97 0.78 1.75 1.75 1.75s1.75-0.78 1.75-1.75c0-0.59-0.3-1.12-0.75-1.43V13h5V19zM18 11H6V5h12V11z"/>
+</svg>
