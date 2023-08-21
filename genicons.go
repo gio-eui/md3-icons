@@ -26,16 +26,15 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"github.com/gio-eui/ivgconv"
 	"go/format"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 	"io/fs"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
-
-	"github.com/gio-eui/ivgconv"
-	"golang.org/x/text/cases"
-	"golang.org/x/text/language"
 )
 
 // Convert all svg files from the assets folder to iconVG files
